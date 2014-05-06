@@ -43,7 +43,29 @@ public class Problem3 {
 		return res;
 	}
 
+	// Solve by factoring
+	public static int solution2(long N) {
+		int result = 1;
+		int factor = 2;
+
+		// factor is necessarily prime as we divide out factor from N before
+		// incrementing factor
+
+		// recognize there can be only one prime factor greater than sqrt(N), so
+		// we can limit factor to less or *equal* to sqrt(N)
+		while (factor <= (int) Math.sqrt(N)) {
+			if (N % factor == 0) {
+				N /= factor;
+				result = factor;
+			} else {
+				factor += (factor == 2) ? 1 : 2;
+			}
+		}
+		return (int) (N == 1 ? result : N);
+	}
+
 	public static void main(String[] args) {
 		System.out.println(solution(600851475143L));
+		System.out.println(solution2(600851475143L));
 	}
 }
